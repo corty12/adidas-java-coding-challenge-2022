@@ -1,0 +1,11 @@
+{
+  "type": "record",
+  "name": "QueueSubscriptionBean",
+  "namespace": "com.adidas.backend.publicservice.model",
+  "fields": [
+    {
+      "name": "email",
+      "type": "string"
+    }
+  ]
+}

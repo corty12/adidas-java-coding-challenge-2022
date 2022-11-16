@@ -16,23 +16,23 @@ import org.springframework.util.concurrent.ListenableFutureCallback;
 public class QueueSubscriptionService {
 
     @Autowired
-    private KafkaTemplate<String, String> kafkaTemplate;
+    private KafkaTemplate<String, QueueSubscriptionBean> kafkaTemplate;
 
     @Value("${kafka.topic.name}")
     private String topicName;
 
-    private void sendMessage(String msg) {
-        ListenableFuture<SendResult<String, String>> future = kafkaTemplate.send(topicName, msg);
+    private void sendMessage(QueueSubscriptionBean pQueueSubscriptionBean) {
+        ListenableFuture<SendResult<String, QueueSubscriptionBean>> future = kafkaTemplate.send(topicName, pQueueSubscriptionBean);
 
         future.addCallback(new ListenableFutureCallback<>() {
             @Override
-            public void onSuccess(SendResult<String, String> result) {
-                log.info("Sent message=[" + msg + "] with offset=[" + result.getRecordMetadata().offset() + "]");
+            public void onSuccess(SendResult<String, QueueSubscriptionBean> result) {
+                log.info("Sent message=[{}] offset=[{}]", pQueueSubscriptionBean, result.getRecordMetadata().offset());
             }
 
             @Override
             public void onFailure(Throwable ex) {
-                log.error("Unable to send message=[" + msg + "] due to : " + ex.getMessage());
+                log.error("Unable to send message=[" + pQueueSubscriptionBean + "]: ", ex);
             }
         });
 
@@ -40,6 +40,6 @@ public class QueueSubscriptionService {
 
     public void subscribe(QueueSubscriptionBean pQueueSubscriptionBean) {
         log.info("Processing subscription for {}", pQueueSubscriptionBean);
-        sendMessage("Processing subscription for " + pQueueSubscriptionBean);
+        sendMessage(pQueueSubscriptionBean);
     }
 }
