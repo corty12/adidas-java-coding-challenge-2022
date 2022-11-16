@@ -1,5 +1,6 @@
 package com.adidas.backend.publicservice.controller;
 
+import com.adidas.backend.publicservice.exception.InvalidEmailException;
 import com.adidas.backend.publicservice.model.QueueSubscriptionBean;
 import com.adidas.backend.publicservice.service.QueueSubscriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +24,13 @@ public class QueueSubscriptionRestController {
     @PostMapping
     public ResponseEntity<String> postQueueSubscription(@Valid @RequestBody QueueSubscriptionBean pQueueSubscriptionBean) {
 
-        mQueueSubscriptionService.subscribe(pQueueSubscriptionBean);
-        // TODO: custom Exception con las callback de kafka?
+        try {
+            mQueueSubscriptionService.subscribe(pQueueSubscriptionBean);
+        } catch (InvalidEmailException exception) {
+            return ResponseEntity
+                    .status(exception.getHttpStatus())
+                    .body(exception.getMessage());
+        }
         return ResponseEntity
                 .ok()
                 .body(SUBSCRIBED_MESSAGE_RESPONSE);
