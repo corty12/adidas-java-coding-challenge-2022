@@ -23,6 +23,7 @@
     <module>email-service</module>
     <module>priority-sale-service</module>
     <module>public-service</module>
+    <module>commons</module>
   </modules>
 
   <properties>
@@ -74,12 +75,4 @@
     </dependency>
   </dependencies>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-maven-plugin</artifactId>
-      </plugin>
-    </plugins>
-  </build>
 </project>
