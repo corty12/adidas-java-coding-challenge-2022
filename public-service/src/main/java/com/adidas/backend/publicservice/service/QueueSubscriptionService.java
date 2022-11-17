@@ -2,8 +2,8 @@ package com.adidas.backend.publicservice.service;
 
 import com.adidas.backend.publicservice.exception.InvalidEmailException;
 import com.adidas.backend.publicservice.model.QueueSubscriptionBean;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -17,11 +17,12 @@ import java.util.regex.Pattern;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class QueueSubscriptionService {
 
     private static final String EMAIL_PATTERN = "^(.+)@(\\S+)$";
-    @Autowired
-    private KafkaTemplate<String, QueueSubscriptionBean> kafkaTemplate;
+    private final KafkaTemplate<String, QueueSubscriptionBean> kafkaTemplate;
+
     @Value("${kafka.topic.name}")
     private String topicName;
 
@@ -33,7 +34,8 @@ public class QueueSubscriptionService {
 
     private void sendMessage(QueueSubscriptionBean pQueueSubscriptionBean) {
         ListenableFuture<SendResult<String, QueueSubscriptionBean>> future = kafkaTemplate.send(topicName, pQueueSubscriptionBean);
-
+        // TODO: gestionar onFailure (retries?)
+        // TODO: future.get()
         future.addCallback(new ListenableFutureCallback<>() {
             @Override
             public void onSuccess(SendResult<String, QueueSubscriptionBean> result) {

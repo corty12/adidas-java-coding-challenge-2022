@@ -1,5 +1,7 @@
 package com.adidas.backend.adiclubservice;
 
+import com.adidas.backend.adiclubservice.controller.AdiClubRestControllerImpl;
+import com.adidas.backend.adiclubservice.dto.AdiClubMemberInfoDto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -13,15 +15,12 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.time.Instant;
 import java.util.Objects;
 
-import com.adidas.backend.adiclubservice.controller.AdiClubRestController;
-import com.adidas.backend.adiclubservice.dto.AdiClubMemberInfoDto;
-
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(value = AdiClubRestController.class)
+@WebMvcTest(value = AdiClubRestControllerImpl.class)
 class AdiClubRestControllerTests {
 
 	@Autowired
-	private AdiClubRestController adiClubRestController;
+	private AdiClubRestControllerImpl adiClubRestController;
 
 	@ParameterizedTest
 	@ValueSource(strings =
