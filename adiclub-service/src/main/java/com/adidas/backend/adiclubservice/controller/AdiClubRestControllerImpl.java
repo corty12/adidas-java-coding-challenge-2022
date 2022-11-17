@@ -25,7 +25,7 @@ public class AdiClubRestControllerImpl implements AdiClubRestController {
                 .body(AdiClubMemberInfoDto
                         .builder()
                         .email(emailAddress)
-                        .points(RANDOM.nextInt(5000))
+                        .points(RANDOM.nextInt(20)) //reduced for testing purposes
                         .registrationDate(Instant.now().minus(RANDOM.nextInt(365), ChronoUnit.DAYS))
                         .build()
                 );

@@ -1,5 +1,6 @@
 package com.adidas.backend.prioritysaleservice.listener;
 
+import com.adidas.backend.avro.model.QueueSubscriptionBean;
 import com.adidas.backend.prioritysaleservice.manager.SubscriptionsManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,8 +15,8 @@ public class SubscriptionsConsumer {
     private final SubscriptionsManager subscriptionsManager;
 
     @KafkaListener(topics = "subscriptions", groupId = "subscriptions")
-    public void subscriptionsListener(String message) {
-        log.info("Received new subscription! {}", message);
-        subscriptionsManager.processNewSubscription(message);
+    public void subscriptionsListener(QueueSubscriptionBean queueSubscriptionBean) {
+        log.info("Received new subscription! {}", queueSubscriptionBean);
+        subscriptionsManager.processNewSubscription(queueSubscriptionBean);
     }
 }

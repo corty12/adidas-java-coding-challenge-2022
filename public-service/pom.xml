@@ -84,6 +84,7 @@
 						<configuration>
 							<sourceDirectory>${project.basedir}/src/main/resources/</sourceDirectory>
 							<outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
+							<stringType>String</stringType>
 						</configuration>
 					</execution>
 				</executions>

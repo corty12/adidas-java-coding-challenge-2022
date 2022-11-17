@@ -1,8 +1,8 @@
 package com.adidas.backend.publicservice.controller;
 
+import com.adidas.backend.avro.model.QueueSubscriptionBean;
 import com.adidas.backend.publicservice.controller.dto.QueueSubscriptionDto;
 import com.adidas.backend.publicservice.exception.InvalidEmailException;
-import com.adidas.backend.publicservice.model.QueueSubscriptionBean;
 import com.adidas.backend.publicservice.service.QueueSubscriptionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

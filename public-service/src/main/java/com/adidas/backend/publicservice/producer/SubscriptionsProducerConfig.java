@@ -1,6 +1,6 @@
 package com.adidas.backend.publicservice.producer;
 
-import com.adidas.backend.publicservice.model.QueueSubscriptionBean;
+import com.adidas.backend.avro.model.QueueSubscriptionBean;
 import io.confluent.kafka.serializers.KafkaAvroSerializer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;

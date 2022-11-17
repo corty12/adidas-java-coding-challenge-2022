@@ -1,5 +1,6 @@
 kafka:
   bootstrapAddress: kafka:9092
+  schemaRegistryAddress: http://schema-registry:8081
   topic:
     name: emails
 

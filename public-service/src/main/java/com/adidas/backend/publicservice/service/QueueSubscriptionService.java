@@ -1,7 +1,7 @@
 package com.adidas.backend.publicservice.service;
 
+import com.adidas.backend.avro.model.QueueSubscriptionBean;
 import com.adidas.backend.publicservice.exception.InvalidEmailException;
-import com.adidas.backend.publicservice.model.QueueSubscriptionBean;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -36,7 +36,7 @@ public class QueueSubscriptionService {
             throws InvalidEmailException {
         log.info("Processing subscription for {}", pQueueSubscriptionBean);
 
-        if (!validEmail(pQueueSubscriptionBean.getEmail().toString())) {
+        if (!validEmail(pQueueSubscriptionBean.getEmail())) {
             throw new InvalidEmailException("Invalid Email", HttpStatus.BAD_REQUEST);
         }
         sendMessage(pQueueSubscriptionBean);
