@@ -40,6 +40,25 @@ services:
     depends_on:
       - kafka
 
+  mysql:
+    image: mysql:latest
+    restart: always
+    container_name: adidas-be-challenge-mysql
+    environment:
+      MYSQL_DATABASE: 'subscriptions'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      - '3306:3306'
+    expose:
+      #      FIXME: expose and entrypoint for testing create tables
+      - '3306'
+    command: --init-file /data/application/init.sql
+    volumes:
+      - mysql:/data/mysql
+      - ./public-service/src/main/resources/init-subscriptions-db.sql:/data/application/init.sql
+
   public-service:
     image: localhost/adidas-be-challenge-publicservice:latest
     container_name: adidas-be-challenge-publicservice
@@ -64,6 +83,7 @@ services:
       - "email-service"
     depends_on:
       - kafka
+      - mysql
 
 
   adi-club-service:
@@ -84,3 +104,6 @@ services:
       dockerfile: Dockerfile
     depends_on:
       - kafka
+
+volumes:
+  mysql:
