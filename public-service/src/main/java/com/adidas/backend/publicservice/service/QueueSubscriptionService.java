@@ -32,6 +32,16 @@ public class QueueSubscriptionService {
                 .matches();
     }
 
+    public void subscribe(QueueSubscriptionBean pQueueSubscriptionBean)
+            throws InvalidEmailException {
+        log.info("Processing subscription for {}", pQueueSubscriptionBean);
+
+        if (!validEmail(pQueueSubscriptionBean.getEmail().toString())) {
+            throw new InvalidEmailException("Invalid Email", HttpStatus.BAD_REQUEST);
+        }
+        sendMessage(pQueueSubscriptionBean);
+    }
+
     private void sendMessage(QueueSubscriptionBean pQueueSubscriptionBean) {
         ListenableFuture<SendResult<String, QueueSubscriptionBean>> future = kafkaTemplate.send(topicName, pQueueSubscriptionBean);
         // TODO: gestionar onFailure (retries?)
@@ -47,15 +57,5 @@ public class QueueSubscriptionService {
                 log.error("Unable to send message=[" + pQueueSubscriptionBean + "]: ", ex);
             }
         });
-    }
-
-    public void subscribe(QueueSubscriptionBean pQueueSubscriptionBean)
-            throws InvalidEmailException {
-        log.info("Processing subscription for {}", pQueueSubscriptionBean);
-
-        if (!validEmail(pQueueSubscriptionBean.getEmail().toString())) {
-            throw new InvalidEmailException("Invalid Email", HttpStatus.BAD_REQUEST);
-        }
-        sendMessage(pQueueSubscriptionBean);
     }
 }

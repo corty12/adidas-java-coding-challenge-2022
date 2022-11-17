@@ -78,6 +78,8 @@ services:
     build:
       context: priority-sale-service
       dockerfile: Dockerfile
+    ports:
+      - "8180:8080"
     links:
       - "adi-club-service"
       - "email-service"
@@ -90,7 +92,7 @@ services:
     image: localhost/adidas-be-challenge-adiclubservice:latest
     container_name: adidas-be-challenge-adiclubservice
     ports:
-      - "8180:8080"
+      - "8280:8080"
     build:
       context: adiclub-service
       dockerfile: Dockerfile

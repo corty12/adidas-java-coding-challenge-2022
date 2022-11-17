@@ -1,5 +1,7 @@
 kafka:
   bootstrapAddress: kafka:9092
+  topic:
+    name: emails
 
 mysql:
   driver: com.mysql.jdbc.Driver
