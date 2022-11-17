@@ -89,6 +89,8 @@ services:
   adi-club-service:
     image: localhost/adidas-be-challenge-adiclubservice:latest
     container_name: adidas-be-challenge-adiclubservice
+    ports:
+      - "8180:8080"
     build:
       context: adiclub-service
       dockerfile: Dockerfile

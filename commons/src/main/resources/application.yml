@@ -1,2 +1,0 @@
-kafka:
-  bootstrapAddress: kafka:9092

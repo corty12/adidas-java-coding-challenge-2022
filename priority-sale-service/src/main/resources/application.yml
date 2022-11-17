@@ -1,2 +1,16 @@
 kafka:
   bootstrapAddress: kafka:9092
+
+mysql:
+  driver: com.mysql.jdbc.Driver
+  database:
+    host: jdbc:mysql://mysql:3306/subscriptions
+    user: user
+    password: password
+
+adi-club:
+  serviceUrl: http://adi-club-service:8080
+  path: /adiclub
+  emailAddressParameter: ?emailAddress=
+
+
