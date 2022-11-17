@@ -14,9 +14,13 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.adidas.backend</groupId>
-			<artifactId>commons</artifactId>
-			<version>0.0.1</version>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.30</version>
 		</dependency>
 	</dependencies>
 
