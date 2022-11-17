@@ -52,7 +52,7 @@ services:
     ports:
       - '3306:3306'
     expose:
-      #      FIXME: expose and entrypoint for testing create tables
+      #      FIXME: exposed
       - '3306'
     command: --init-file /data/application/init.sql
     volumes:

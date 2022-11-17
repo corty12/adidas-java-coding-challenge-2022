@@ -1,4 +1,4 @@
-package com.adidas.backend.prioritysaleservice.consumer;
+package com.adidas.backend.emailservice.consumer;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -15,7 +15,7 @@ import java.util.Map;
 
 @EnableKafka
 @Configuration
-public class SubscriptionConsumerConfig {
+public class EmailConsumerConfig {
 
     @Value(value = "${kafka.bootstrapAddress}")
     private String bootstrapAddress;

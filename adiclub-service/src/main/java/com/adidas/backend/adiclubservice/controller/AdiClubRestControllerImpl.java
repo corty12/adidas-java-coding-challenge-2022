@@ -14,20 +14,20 @@ import java.util.Random;
 @RestController
 @RequestMapping(value = "/adiclub")
 public class AdiClubRestControllerImpl implements AdiClubRestController {
-  private static final Random RANDOM = new Random(System.nanoTime());
+    private static final Random RANDOM = new Random(System.nanoTime());
 
-  @Override
-  @GetMapping
-  public ResponseEntity<AdiClubMemberInfoDto> getAdiClubMemberInfo(@RequestParam(value = "emailAddress") final String emailAddress) {
+    @Override
+    @GetMapping
+    public ResponseEntity<AdiClubMemberInfoDto> getAdiClubMemberInfo(@RequestParam(value = "emailAddress") final String emailAddress) {
 
-    return ResponseEntity
-            .ok()
-            .body(AdiClubMemberInfoDto
-                    .builder()
-                    .email(emailAddress)
-                    .points(RANDOM.nextInt(5000))
-                    .registrationDate(Instant.now().minus(RANDOM.nextInt(365), ChronoUnit.DAYS))
-                    .build()
-            );
-  }
+        return ResponseEntity
+                .ok()
+                .body(AdiClubMemberInfoDto
+                        .builder()
+                        .email(emailAddress)
+                        .points(RANDOM.nextInt(5000))
+                        .registrationDate(Instant.now().minus(RANDOM.nextInt(365), ChronoUnit.DAYS))
+                        .build()
+                );
+    }
 }
